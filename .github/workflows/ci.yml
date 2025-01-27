@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Java environment
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      # Display echo message
+      - name: Display echo message
+        run: echo "Hi, I am from COSC 1209 class"
+
+      # Build the project with Gradle
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      # Run tests
+      - name: Run tests
+        run: ./gradlew test
